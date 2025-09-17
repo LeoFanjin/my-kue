@@ -109,7 +109,7 @@ function cleanup(effectFn) {
     const deps = effectFn.deps[i];
     deps.delete(effectFn);
   }
-  effectFn.deps.length = [];
+  effectFn.deps = [];
 }
 
 function computed(getter) {

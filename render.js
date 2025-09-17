@@ -96,7 +96,7 @@ function createRenderer(options) {
             anchor
           );
         }
-      })
+      });
     } else if (typeof type === 'object' || typeof type === 'function') {
       // object --> 有状态组件
       // function --> 函数式组件
@@ -113,9 +113,9 @@ function createRenderer(options) {
         // 更新组件
         patchComponent(n1, n2, anchor);
       }
-    } else if (typeof type === 'xxx') {
+    }/*  else if (typeof type === 'xxx') {
       // 其它类型
-    }
+    } */
   }
 
   function mountElement(vnode, container, anchor) {
@@ -243,7 +243,7 @@ function createRenderer(options) {
         oldStartVNode = oldChildren[++oldStartIdx];
         newEndVNode = newChildren[--newEndIdx];
       } else if (oldEndVNode.key === newStartVNode.key) {
-        // 第四步：oldEndVNode和 newEndVNode 比较
+        // 第四步：oldEndVNode和 newStartVNode 比较
         // 打补丁
         patch(oldEndVNode, newStartVNode, container);
         // 移动dom
@@ -883,7 +883,7 @@ const KeepAlive = {
         // 如果有缓存的内容，则说明不应该执行挂载，而应该执行激活
         // 继承组件实例
         rawVNode.component = cachedVNode.component;
-        // 在 vnode 上添加 keptAlive 属性，标记为 true，比米娜渲染器重新挂载它
+        // 在 vnode 上添加 keptAlive 属性，标记为 true，避免渲染器重新挂载它
         rawVNode.keptAlive = true;
       } else {
         // 如果没有缓存，则将其添加到缓存中，这样下次激活组件时就不会执行新的挂载动作了
@@ -940,7 +940,7 @@ const Transition = {
       const innerVNode = slots.default();
       innerVNode.transition = {
         beforeEnter(el) {
-          // 设置处室状态：添加 enter-from 和 enter-active 类
+          // 设置初始状态：添加 enter-from 和 enter-active 类
           el.classList.add('enter-from');
           el.classList.add('enter-active');
         },
@@ -960,7 +960,7 @@ const Transition = {
           // 设置离场过渡的初始状态：添加 leave-from 和 leave-active 类
           el.classList.add('leave-from');
           el.classList.add('leave-active');
-          // 强制 reflow，使得处室状态生效
+          // 强制 reflow，使得初始状态生效
           document.body.offsetHeight;
           nextFrame(() => {
             // 移除 leave-from 类，添加 leave-to 类
